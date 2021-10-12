@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="NováSložka1\**" />
+    <Compile Remove="SourceData\DataAccess\**" />
+    <EmbeddedResource Remove="NováSložka1\**" />
+    <EmbeddedResource Remove="SourceData\DataAccess\**" />
+    <None Remove="NováSložka1\**" />
+    <None Remove="SourceData\DataAccess\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="DatabaseAccess\" />
+  </ItemGroup>
+
+</Project>
