@@ -4,7 +4,7 @@
     <ShowAllFiles>false</ShowAllFiles>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Update="Form1.cs">
+    <Compile Update="Dashboard.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>
