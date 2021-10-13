@@ -12,6 +12,7 @@ namespace CaseStudyCSOB.Models
         public string Surname { get; set; }
         public string EmployeeId { get; set; }
         public string Department { get; set; }
+        public DateTime CreationDate { get; set; }
 
         /// <summary>
         /// Constructor for the Product model.
@@ -21,18 +22,19 @@ namespace CaseStudyCSOB.Models
         /// <param name="surname"></param>
         /// <param name="employeeId"></param>
         /// <param name="department"></param>
-        public Person(string name, string surname, string employeeId, string department)
+        public Person(string name, string surname, string employeeId, string department, DateTime creationDate)
         {
             Name = name;
             Surname = surname;
             EmployeeId = employeeId;
             Department = department;
+            CreationDate = creationDate;
         }
         public string PersonSummary
         {
             get
             {
-                return $"{EmployeeId} | {Name} {Surname} ({Department})";
+                return $"{EmployeeId} | {Name} {Surname} ({Department}) | {CreationDate}";
             }
         }
         public Person()

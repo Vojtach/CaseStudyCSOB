@@ -19,6 +19,16 @@ namespace CaseStudyCSOB
             }
         }
 
+        public static bool CheckEmployeeIdExists(string employeeId)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.ConnectingString("CaseStudyCSOBDatabase")))
+            {
+                var output = connection.Query("dbo.People_GetAllByEmployeeId @EmployeeId", new { EmployeeId = employeeId });
+                bool response = (output.Count() > 0) ? true : false;
+                return response;
+            }
+        }
+
         public static void DeleteAllPeople()
         {
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.ConnectingString("CaseStudyCSOBDatabase")))
@@ -35,15 +45,11 @@ namespace CaseStudyCSOB
             }
         }
 
-        public static void InsertPerson(string name, string surname, string employeeId, string department)
+        public static void InsertPerson(Person person)
         {
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.ConnectingString("CaseStudyCSOBDatabase")))
             {
-                List<Person> people = new List<Person>();
-
-                people.Add(new Person { Name = name, Surname = surname, EmployeeId = employeeId, Department = department });
-
-                connection.Execute("dbo.People_Insert @Name, @Surname, @EmployeeId, @Department", people);
+                connection.Execute("dbo.People_Insert @Name, @Surname, @EmployeeId, @Department, @CreationDate", person);
             }
         }
     }
