@@ -10,24 +10,20 @@ namespace CaseStudyCSOB.Controllers
 {
     public class ExcelGlobals
     {
-        public static ExcelPackage package = new ExcelPackage(new FileInfo("../SourceData/data.xlsx"));
-        public static ExcelWorksheet sheet = package.Workbook.Worksheets["List 1"];
+        public static ExcelPackage package = new ExcelPackage(new FileInfo("../../../SourceData/data.xlsx"));
+        public static ExcelWorksheet sheet = package.Workbook.Worksheets["DATA"];
     }
     public static class DataController
     {
         public static int GetPeopleCount()
         {
-            ExcelWorksheet workSheet = ExcelGlobals.package.Workbook.Worksheets[0];
-            var start = workSheet.Dimension.Start;
-            var end = workSheet.Dimension.End;
+            var start = ExcelGlobals.sheet.Dimension.Start.Row;
+            var end = ExcelGlobals.sheet.Dimension.End.Row;
             int peopleCount = 0;
-            string cellText = "";
 
-            for (int row = start.Row; row <= end.Row; row++)
+            for (int row = start; row <= end; row++)
             {
-                cellText = ExcelGlobals.sheet.Cells[$"A{row}"].Text;
-
-                if (String.IsNullOrEmpty(cellText))
+                if (!String.IsNullOrEmpty(ExcelGlobals.sheet.Cells[$"A{row}"].Text))
                 {
                     peopleCount++;
                 }
@@ -38,18 +34,20 @@ namespace CaseStudyCSOB.Controllers
         public static void ExtractSourceData()
         {
             List<Person> people = new List<Person>();
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
-            using (var package = new ExcelPackage(new FileInfo("../SourceData/data.xlsx")))
-            {
-                for(int i = 0; i < GetPeopleCount(); i++)
+                for(int i = 2; i <= GetPeopleCount(); i++)
                 {
                     string name = ExcelGlobals.sheet.Cells[$"A{i}"].Text;
-                    string surname = ExcelGlobals.sheet.Cells["B2"].Text;
-                    string employeeId = ExcelGlobals.sheet.Cells["C2"].Text;
-                    string department = ExcelGlobals.sheet.Cells["D2"].Text;
+                    string surname = ExcelGlobals.sheet.Cells[$"B{i}"].Text;
+                    string employeeId = ExcelGlobals.sheet.Cells[$"C{i}"].Text;
+                    string department = ExcelGlobals.sheet.Cells[$"D{i}"].Text;
 
-                    people.Add(new Person(name, surname, employeeId, department));
+                    people.Add( new Person( name, surname, employeeId, department, DateTime.Now ));
                 }
+            foreach(Person person in people)
+            {
+                DataAccess.InsertPerson(person);
             }
         }
     }
