@@ -261,7 +261,7 @@ namespace CaseStudyCSOB
             this.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "Dashboard";
-            this.Text = "Form1";
+            this.Text = "CSOBCaseStudy";
             this.ResumeLayout(false);
             this.PerformLayout();
 
