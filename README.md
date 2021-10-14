@@ -4,7 +4,7 @@
 
 ## Set-up:
   <b>Follow instructions:</b>
-  - Get my full database backup (/database_backup) and insert it into MSSQL studio.
+  - Get my full database backup (/database_backup/CaseStudyCSOBDatabase.bak) and insert it into MSSQL studio.
   - Clone this repo to your system.
   - Run in visual studio.
   - Done!
