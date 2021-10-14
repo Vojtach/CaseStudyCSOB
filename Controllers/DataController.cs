@@ -40,10 +40,10 @@ namespace CaseStudyCSOB.Controllers
                 {
                     string name = ExcelGlobals.sheet.Cells[$"A{i}"].Text;
                     string surname = ExcelGlobals.sheet.Cells[$"B{i}"].Text;
-                    string employeeId = ExcelGlobals.sheet.Cells[$"C{i}"].Text;
+                    string employeeId = (ExcelGlobals.sheet.Cells[$"C{i}"].Text.Length == 6) ? ExcelGlobals.sheet.Cells[$"C{i}"].Text : throw new InvalidDataException();
                     string department = ExcelGlobals.sheet.Cells[$"D{i}"].Text;
 
-                    people.Add( new Person( name, surname, employeeId, department, DateTime.Now ));
+                people.Add( new Person( name, surname, employeeId, department, DateTime.Now ));
                 }
             foreach(Person person in people)
             {
